@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'github-rest-apis-project';
+  title = 'Welcome to github-rest-apis-project';
 }
