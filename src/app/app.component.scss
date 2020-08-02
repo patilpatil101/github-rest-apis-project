@@ -7,13 +7,25 @@
         color: white
     }
 
-    padding: 10px 312px;
+    padding: 10px 190px;
 }
 
 .accordion-outer {
     padding-top: 20px;
-    width: 50%;
-    margin: auto;
+    width: 100%;
+    padding: 13px 185px;
+    background-color: #f3f1f1;
+    overflow-y: scroll;
+
+
+    .card {
+        .btn {
+            width: 20%;
+            margin: auto;
+            margin-right: 12px;
+            margin-bottom: 12px;
+        }
+    }
 
     .card-body {
         .img {

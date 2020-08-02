@@ -3,13 +3,14 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          Sort By
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" (click)="sortBy('name-asc')">Name(A-Z)</a>
+          <a class="dropdown-item" (click)="sortBy('name-dsc')">Name(Z-A)</a>
+          <a class="dropdown-item" (click)="sortBy('rank-asc')">Rank <i class="fa fa-arrow-up"></i></a>
+          <a class="dropdown-item" (click)="sortBy('rank-dsc')">Rank <i class="fa fa-arrow-down"></i></a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
     </ul>
@@ -22,30 +23,55 @@
 
 
 <div class="accordion-outer" id="accordion">
-  <div class="card mb-4" *ngFor="let user of users;let i = index;">
+  <div class="mb-2" *ngIf="users">
+    Total Results: {{users.length}}
+  </div>
+  <div class="card mb-3" *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p } | sort : direction: sortField;let i = index;">
     <div class="container">
       <div class="row card-body">
         <div class="col-sm-3">
-          <img class="img" src="{{user.avatar_url}}">
+          <img class="img" [src]="user.avatar_url" alt="No Image">
         </div>
         <div class="col">
-          <div>{{user.login}}</div>
+          <div>{{user.login | uppercase}}</div>
           <div>Profile URL: {{user.url}}</div>
+          <div>Score: {{user.score}}</div>
+          <div>Type: {{user.type}}</div>
         </div>
       </div>
     </div>
 
-    <table class="table table-hover">
+    <button *ngIf="user.show" class="btn btn-primary" (click)="getDetails(user.login, i)">
+      <span>Collapse</span>
+    </button>
+    <table class="table table-hover" *ngIf="user.show">
+      <thead>
+        <tr>
+          <th>Repo Name</th>
+          <th>Language</th>
+          <th>Open Issues</th>
+          <th>Stars</th>
+          <th>Followers</th>
+          <th>Fork Count</th>
+        </tr>
+      </thead>
       <tbody>
         <tr *ngFor="let repo of user.repos;">
           <td>{{repo.name ? repo.name: 'N/A'}}</td>
           <td>{{repo.language ? repo.language : 'N/A'}}</td>
+          <td class="text-center">{{repo.open_issues_count}}</td>
+          <td class="text-center">{{repo.stargazers_count}}</td>
+          <td class="text-center">{{repo.watchers}}</td>
+          <td class="text-center">{{repo.forks_count}}</td>
         </tr>
       </tbody>
     </table>
 
-    <button class="btn btn-primary" (click)="getDetails(user.login, i)">
-      Details
+    <button *ngIf="!user.show" class="btn btn-primary" (click)="getDetails(user.login, i)">
+      <span>Details</span>
     </button>
+  </div>
+  <div class="pagination-outer float-right" *ngIf="users">
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
   </div>
 </div>

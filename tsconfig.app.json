@@ -5,7 +5,8 @@
     "outDir": "./out-tsc/app",
     "types": [],
     "experimentalDecorators": true,
-    "allowJs": true
+    "allowJs": true,
+    "enableIvy": false
   },
   "files": [
     "src/main.ts",

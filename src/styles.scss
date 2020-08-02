@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    font-family: 'Lato-Regular';
+}
+
+/* font converted using font-converter.net. thank you! */
+@font-face {
+    font-family: "Lato-Regular";
+    src: url("/assets/fonts/Lato-Regular.eot");
+    /* IE9 Compat Modes */
+    src: url("/assets/fonts/Lato-Regular.eot?#iefix") format("embedded-opentype"),
+        /* IE6-IE8 */
+        url("/assets/fonts/Lato-Regular.otf") format("opentype"),
+        /* Open Type Font */
+        url("/assets/fonts/Lato-Regular.svg") format("svg"),
+        /* Legacy iOS */
+        url("/assets/fonts/Lato-Regular.ttf") format("truetype"),
+        /* Safari, Android, iOS */
+        url("/assets/fonts/Lato-Regular.woff") format("woff"),
+        /* Modern Browsers */
+        url("/assets/fonts/Lato-Regular.woff2") format("woff2");
+    /* Modern Browsers */
+    font-weight: normal;
+    font-style: normal;
+}
+
+.lr {
+    font-family: 'Lato-Regular';
+}

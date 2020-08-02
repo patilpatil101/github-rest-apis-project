@@ -15,11 +15,14 @@ export class AppComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   repos: any;
   users: any;
+  sortField: string;
+  p: number = 1;
+  direction: string;
 
   constructor(public service: AppService) { }
 
   ngOnInit() {
-    this.getUsers('patilpatil101');
+    this.getUsers('rohit')
     this.subscription = this.searchTextChanged.pipe(
       debounceTime(300)
     ).subscribe((searchTextValue) => { this.getUsers(searchTextValue) });
@@ -30,6 +33,9 @@ export class AppComponent implements OnInit, OnDestroy {
       this.response = res;
       if (this.response && this.response.items) {
         this.users = this.response.items;
+        this.response.items.forEach((v, k) => {
+          this.users[k]['show'] = false;
+        });
       }
     })
   }
@@ -45,11 +51,33 @@ export class AppComponent implements OnInit, OnDestroy {
           this.users.forEach((v: any, k: number) => {
             if (i == k) {
               this.users[i]['repos'] = res;
+              this.users[k].show = !this.users[k].show;
             }
           });
         }
       }
     })
+  }
+
+  sortBy(type: string) {
+    switch (type) {
+      case 'name-asc':
+        this.sortField = 'login';
+        this.direction = 'asc';
+        break;
+      case 'name-dsc':
+        this.sortField = 'login';
+        this.direction = 'dsc';
+        break;
+      case 'rank-asc':
+        this.sortField = 'score';
+        this.direction = 'asc';
+        break;
+      case 'rank-dsc':
+        this.sortField = 'score';
+        this.direction = 'dsc';
+        break;
+    }
   }
 
   ngOnDestroy() {
