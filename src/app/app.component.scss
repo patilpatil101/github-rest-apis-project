@@ -1,0 +1,25 @@
+.navbar {
+    &.bg-nav-color {
+        background-color: #798ae0 !important;
+    }
+
+    .dropdown-toggle {
+        color: white
+    }
+
+    padding: 10px 312px;
+}
+
+.accordion-outer {
+    padding-top: 20px;
+    width: 50%;
+    margin: auto;
+
+    .card-body {
+        .img {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+        }
+    }
+}

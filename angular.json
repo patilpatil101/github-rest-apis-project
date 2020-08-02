@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "github-rest-apis-project"
+    }
+  },
+  "defaultProject": "github-rest-apis-project",
+  "cli": {
+    "analytics": false
+  }
 }
